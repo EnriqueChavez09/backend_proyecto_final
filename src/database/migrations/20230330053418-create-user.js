@@ -29,6 +29,12 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
+      role: {
+        type: Sequelize.ENUM,
+        values: ["ADMIN", "CLIENT"],
+        defaultValue: "CLIENT",
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

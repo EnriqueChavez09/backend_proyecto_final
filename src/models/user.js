@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,
+      role: DataTypes.ENUM("ADMIN", "CLIENT"),
     },
     {
       sequelize,

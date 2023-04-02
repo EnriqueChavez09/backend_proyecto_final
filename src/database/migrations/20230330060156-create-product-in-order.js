@@ -11,7 +11,6 @@ module.exports = {
       },
       orderId: {
         type: Sequelize.INTEGER,
-        field: "order_id",
         references: {
           model: "Orders",
           key: "id",
@@ -19,7 +18,6 @@ module.exports = {
       },
       productId: {
         type: Sequelize.INTEGER,
-        field: "product_id",
         references: {
           model: "Products",
           key: "id",
@@ -37,12 +35,10 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "created_at",
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "updated_at",
       },
     });
   },

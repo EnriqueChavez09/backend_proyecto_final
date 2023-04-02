@@ -19,15 +19,13 @@ module.exports = {
         type: Sequelize.FLOAT,
       },
       availableQty: {
-        type: Sequelize.BOOLEAN,
-        field: "available_qty",
+        type: Sequelize.INTEGER,
       },
       status: {
         type: Sequelize.STRING,
       },
       userId: {
         type: Sequelize.INTEGER,
-        field: "user_id",
         references: {
           model: "Users",
           key: "id",
@@ -39,12 +37,10 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "created_at",
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "updated_at",
       },
     });
   },

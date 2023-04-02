@@ -23,8 +23,8 @@ const loginController = async (req, res, next) => {
         error: "Invalid Password",
       });
     }
-    const { id, username } = user;
-    const token = await AuthService.getToken({ id, username, email });
+    const { id, username, role } = user;
+    const token = await AuthService.getToken({ id, username, email, role });
     res.status(200).json({ id, username, email, token });
   } catch (error) {
     next(error);
@@ -33,10 +33,15 @@ const loginController = async (req, res, next) => {
 
 const registerController = async (req, res, next) => {
   try {
-    console.log(req.body);
-
-    const { username, password, email } = req.body;
-    const data = { username, password, email };
+    const { username, password, email, role } = req.body;
+    if (role != "ADMIN" && role != "CLIENT") {
+      return next({
+        status: 400,
+        message: "Ingresa un role de tipo ADMIN o CLIENT",
+        error: [],
+      });
+    }
+    const data = { username, password, email, role };
     const user = await UserService.getUserByEmail(email);
     if (user) {
       return next({

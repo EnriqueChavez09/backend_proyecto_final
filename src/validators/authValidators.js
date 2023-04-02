@@ -11,6 +11,13 @@ const registerValidator = [
     .withMessage("El username debe ser un string")
     .isLength({ min: 6, max: 30 })
     .withMessage("El username debe tener entre 6 y 30 caracteres"),
+  check("role", "Error con el campo role")
+    .exists()
+    .withMessage("El role debe existir")
+    .notEmpty()
+    .withMessage("El role no debe estar vacio")
+    .isString()
+    .withMessage("El role debe ser un string"),
   check("email", "Error con el correo electronico")
     .exists()
     .withMessage("No se encontro la propiedad email")

@@ -11,7 +11,6 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        field: "user_id",
         references: {
           model: "Users",
           key: "id",
@@ -19,17 +18,14 @@ module.exports = {
       },
       totalPrice: {
         type: Sequelize.FLOAT,
-        field: "total_price",
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "created_at",
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: "updated_at",
       },
     });
   },
