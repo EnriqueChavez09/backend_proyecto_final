@@ -20,7 +20,16 @@ class ProductService {
       throw error;
     }
   }
-
+  static async getProduct(id) {
+    try {
+      const product = await Product.findOne({
+        where: { id },
+      });
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
   static async listProducts(userId, role) {
     try {
       if (role === "ADMIN") {
@@ -47,7 +56,6 @@ class ProductService {
         });
         return newListProducts;
       }
-      return listProducts;
     } catch (error) {
       throw error;
     }
