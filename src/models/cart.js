@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Cart.init({
     userId: DataTypes.INTEGER,
-    totalPrice: DataTypes.FLOAT
+    totalPrice: DataTypes.FLOAT,
+    status: DataTypes.ENUM("GENERATED", "PURCHASED"),
   }, {
     sequelize,
     modelName: 'Cart',

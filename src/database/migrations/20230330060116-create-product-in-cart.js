@@ -30,7 +30,10 @@ module.exports = {
         type: Sequelize.FLOAT,
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: ["GENERATED", "PURCHASED"],
+        defaultValue: "GENERATED",
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

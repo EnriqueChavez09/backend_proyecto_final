@@ -9,6 +9,7 @@ const {
   createController,
   detailController,
   addProductController,
+  cheackoutController
 } = require("../controllers/cartControllers");
 const router = Router();
 router.get("/carts", authenticate, hasRoles("CLIENT"), createController);
@@ -25,6 +26,13 @@ router.post(
   hasRoles("CLIENT"),
   addProductValidator,
   addProductController
+);
+router.post(
+  "/carts/:id/cheackout",
+  authenticate,
+  hasRoles("CLIENT"),
+  detailCartValidator,
+  cheackoutController
 );
 
 module.exports = router;

@@ -19,6 +19,12 @@ module.exports = {
       totalPrice: {
         type: Sequelize.FLOAT,
       },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["GENERATED", "PURCHASED"],
+        defaultValue: "GENERATED",
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

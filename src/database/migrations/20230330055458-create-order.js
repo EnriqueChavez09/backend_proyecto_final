@@ -20,7 +20,10 @@ module.exports = {
         type: Sequelize.FLOAT,
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: ["EN REVIEW", "DELIVERED", "CANCELLED"],
+        defaultValue: "EN REVIEW",
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

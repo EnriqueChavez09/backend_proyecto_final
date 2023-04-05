@@ -65,4 +65,12 @@ const addProductController = async (req, res, next) => {
   }
 };
 
-module.exports = { createController, detailController, addProductController };
+const cheackoutController= async (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createController, detailController, addProductController, cheackoutController };
