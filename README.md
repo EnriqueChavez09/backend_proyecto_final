@@ -12,9 +12,7 @@ These instructions will allow you to get a working copy of the project on your l
 
 - `v18.12.1`
 
-## **Authors** ✒️
+## **Author** ✒️
 - _Renildo Chavez - Full Stack developer_
-
-- _Sebastian Chavez - Front-end developer_
 
 <p align="center">2023</p>
