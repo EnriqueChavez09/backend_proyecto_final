@@ -4,8 +4,8 @@ const detailController = async (req, res, next) => {
   try {
     const { email } = req.user;
     const user = await UserService.getUserByEmail(email);
-    const { id, username, role } = user;
-    res.status(200).json({ id, username, email, role });
+    const { id, username, role, avatar } = user;
+    res.status(200).json({ id, username, email, avatar, role });
   } catch (error) {
     next(error);
   }

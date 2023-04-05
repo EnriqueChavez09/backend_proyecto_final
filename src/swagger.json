@@ -1,0 +1,479 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ecommerce-DEV3CH",
+    "description": "Estructura de las APIs. Se ha utlizado Express JS como backend",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://dev3ch-ecommerce-api.onrender.com/api/v1",
+      "description": "Link de Producción"
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1",
+      "description": "Link de Desarrollo"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Registrar un usuario",
+        "requestBody": {
+          "description": "Hay dos tipos de usuarios: ADMIN y CLIENT",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Register"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Iniciar Sesión",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "rchavezs@uni.pe"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123456789"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Detalle del usuario",
+        "parameters": [
+          {
+            "name": "acces-token",
+            "in": "header",
+            "description": "Es el token del usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailUser"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "summary": "Actualizar un usuario",
+        "parameters": [
+          {
+            "name": "acces-token",
+            "in": "header",
+            "description": "Es el token del usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "Sebastian"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "example": "https://img.freepik.com/vector-premium/marco-gradiente-historias-sociales-avatar_41737-3.jpg?w=740"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Sin contenido"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Lista de Productos",
+        "parameters": [
+          {
+            "name": "acces-token",
+            "in": "header",
+            "description": "Es el token del usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de Productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListProduct"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Product"],
+        "summary": "Crear un producto",
+        "parameters": [
+          {
+            "name": "acces-token",
+            "in": "header",
+            "description": "Es el token del usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Arroz"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "5 kilos de marca Costeño"
+                  },
+                  "price": {
+                    "type": "float",
+                    "example": 14.9
+                  },
+                  "availableQty": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 20
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Activo"
+                  },
+                  "image": {
+                    "type": "string",
+                    "example": "https://wongfood.vtexassets.com/arquivos/ids/254547-1200-auto?v=636765120201500000&width=1200&height=auto&aspect=true"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+            "200": {
+                "description": "Producto Creado",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ListProduct"
+                    }
+                  }
+                }
+              },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Product"],
+        "summary": "Actualizar un producto",
+        "parameters": [
+          {
+            "name": "acces-token",
+            "in": "header",
+            "description": "Es el token del usuario",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "4 kilos de marca Costeño"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Sin contenido"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Register": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Enrique"
+          },
+          "email": {
+            "type": "string",
+            "example": "rchavezs@uni.pe"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "role": {
+            "type": "string",
+            "example": "ADMIN"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": "rchavezs@uni.pe"
+          },
+          "email": {
+            "type": "string",
+            "example": "rchavezs@uni.pe"
+          },
+          "username": {
+            "type": "string",
+            "example": "Enrique"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJFbnJpcXVlIiwiZW1haWwiOiJyY2hhdmV6c0B1bmkucGUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNjgwNjY0NTY2LCJleHAiOjE2ODA3NTA5NjZ9.WdcJTkNafvv2VMb6_4rOXADXD32mzxUuQG12TWsX1l6AHNT3CdeIFJ2eVxFux-rWMrJCn9gnDFQeRC2g9LMsKQ"
+          }
+        }
+      },
+      "DetailUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": "rchavezs@uni.pe"
+          },
+          "email": {
+            "type": "string",
+            "example": "rchavezs@uni.pe"
+          },
+          "username": {
+            "type": "string",
+            "example": "Enrique"
+          },
+          "role": {
+            "type": "string",
+            "example": "ADMIN"
+          }
+        }
+      },
+      "ListProduct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Arroz"
+          },
+          "description": {
+            "type": "string",
+            "example": "5 kilos de marca Costeño"
+          },
+          "price": {
+            "type": "float",
+            "example": 14.9
+          },
+          "availableQty": {
+            "type": "integer",
+            "format": "int64",
+            "example": 20
+          },
+          "status": {
+            "type": "string",
+            "example": "Activo"
+          },
+          "image": {
+            "type": "string",
+            "example": "https://wongfood.vtexassets.com/arquivos/ids/254547-1200-auto?v=636765120201500000&width=1200&height=auto&aspect=true"
+          },
+          "user": {
+            "$ref": "#/components/schemas/DetailUser"
+          }
+        }
+      },
+      "Error": {
+        "required": ["code", "message"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
