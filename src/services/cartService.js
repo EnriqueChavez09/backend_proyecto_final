@@ -43,6 +43,16 @@ class CartService {
       throw error;
     }
   }
+  static async changePurchased(data, id) {
+    try {
+      const cart = await Cart.update(data, {
+        where: { id },
+      });
+      return cart;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = CartService;

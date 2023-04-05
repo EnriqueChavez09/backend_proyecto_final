@@ -27,8 +27,8 @@ router.post(
   addProductValidator,
   addProductController
 );
-router.post(
-  "/carts/:id/cheackout",
+router.get(
+  "/carts/:id/checkout",
   authenticate,
   hasRoles("CLIENT"),
   detailCartValidator,

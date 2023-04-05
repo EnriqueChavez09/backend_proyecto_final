@@ -28,13 +28,6 @@ const addProductValidator = [
     .withMessage("El quantity no debe estar vacio")
     .isInt()
     .withMessage("El quantity debe ser un número"),
-  check("status", "Error con el campo status")
-    .exists()
-    .withMessage("El status debe existir")
-    .notEmpty()
-    .withMessage("El status no debe estar vacio")
-    .isString()
-    .withMessage("El status debe ser un string"),
   (req, res, next) => {
     validateResult(req, res, next);
   },
